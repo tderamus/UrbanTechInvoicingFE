@@ -1,10 +1,20 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { getAllCustomers } from "@/api/CustomerData";
+import NavMenu from "@/components/NavBar";
+
+
+getAllCustomers().then((customers) => {
+  console.log("Fetched customers:", customers);
+}).catch((error) => {
+  console.error("Error fetching customers:", error);
+});
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+      <NavMenu />
         <Image
           className={styles.logo}
           src="/next.svg"

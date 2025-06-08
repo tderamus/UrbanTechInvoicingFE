@@ -1,22 +1,33 @@
 {
   "name": "urbantechinvoicingfe",
+  "author": "Toren DeRamus",
+  "description": "Urban Tech Invoicing Frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
+    "axios": "^1.9.0",
+    "bootstrap": "^5.3.6",
     "husky": "^9.1.7",
     "next": "15.3.3",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "eslint": "^9",
-    "eslint-config-next": "15.3.3"
+    "eslint-config-next": "15.3.3",
+    "jest": "^29.7.0",
+    "msw": "^2.10.1",
+    "whatwg-fetch": "^3.6.20"
   }
 }
