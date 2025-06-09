@@ -8,11 +8,11 @@ function NavMenu() {
     <div className={styles.navbar}>
       <ul>
         <li><Link href="/">Home</Link></li>
-        <li><Link href="/customers">Customers</Link></li>
-        <li><Link href="/invoices">Invoices</Link></li>
-        <li><Link href="/products">Products</Link></li>
-        <li><Link href="/services">Services</Link></li>
-        <li><Link href="/payments">Payments</Link></li>
+        <li><Link href="/Customers">Customers</Link></li>
+        <li><Link href="/Invoices">Invoices</Link></li>
+        <li><Link href="/Products">Products</Link></li>
+        <li><Link href="/Services">Services</Link></li>
+        <li><Link href="/Payments">Payments</Link></li>
       </ul>    
     </div>
   )
