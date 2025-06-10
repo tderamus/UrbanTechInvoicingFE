@@ -1,7 +1,6 @@
 import { clientCredentials } from "@/utils/client";
 
 const endpoint = `${clientCredentials.databaseURL}`;
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 // API Call to get all customers
 const getAllCustomers = () =>
@@ -12,22 +11,41 @@ const getAllCustomers = () =>
         "Content-Type": "application/json",
       },
     })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data) {
-        const customersArray = Object.keys(data).map((key) => ({
-          id: key,
-          ...data[key],
-        }));
-        resolve(customersArray);
-      } else {
-        reject("No customers found");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching customers:", error);
-      reject(error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched customers:", data);
+        if (Array.isArray(data)) {
+          resolve(data);
+        } else if (Array.isArray(data.$values)) {
+          resolve(data.$values);
+        } else {
+          reject("No customers found or invalid data format");
+        }
+      })
+
+      .catch((error) => {
+        console.error("Error fetching customers:", error);
+        reject(error);
+      });
   });
 
-  export { getAllCustomers };
+  // API Call to create a new customer
+   const createCustomer = (customerData) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/customers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(customerData),
+    })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch((error) => {
+      console.error("Error creating customer:", error);
+      reject(error);
+    });
+  }
+);
+
+export { getAllCustomers, createCustomer };
