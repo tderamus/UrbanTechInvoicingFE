@@ -13,7 +13,8 @@ const getAllCustomers = () =>
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched customers:", data);
+        // Check if data is an array or has a $values property
+        // and resolve accordingly
         if (Array.isArray(data)) {
           resolve(data);
         } else if (Array.isArray(data.$values)) {

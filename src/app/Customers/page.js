@@ -12,7 +12,9 @@ function Customers() {
   useEffect(() => {
     getAllCustomers()
       .then((data) => {
-        // If your API returns { customers: [...] }
+        // API returns { customers: [...] }
+        // Check if data is an array or has a $values property
+        // and set state accordingly
         if (Array.isArray(data)) {
           setCustomers(data);
         } else if (Array.isArray(data.$values)) {
@@ -25,9 +27,6 @@ function Customers() {
       .catch(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    console.log('Customers data:', customers);
-  }, [customers]);
   return (
     <>
       <NavMenu />
