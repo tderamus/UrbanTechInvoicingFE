@@ -49,4 +49,44 @@ const getAllCustomers = () =>
   }
 );
 
-export { getAllCustomers, createCustomer };
+// API Call to update an existing customer
+const updateCustomer = (customerId, customerData) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/customers/${customerId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(customerData),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch((error) => {
+        console.error("Error updating customer:", error);
+        reject(error);
+      });
+  });
+
+// API Call to delete a customer
+const deleteCustomer = (customerId) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/customers/${customerId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          resolve("Customer deleted successfully");
+        } else {
+          reject("Failed to delete customer");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting customer:", error);
+        reject(error);
+      });
+  });
+
+export { getAllCustomers, createCustomer, updateCustomer, deleteCustomer };
