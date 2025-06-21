@@ -4,10 +4,10 @@ const endpoint = `${clientCredentials.databaseURL}`;
 const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
 
-// API Call to get all customers
-const getAllCustomers = () =>
+// API Call to get all Services
+const getAllServices = () =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/customers`, {
+    fetch(`${endpoint}/services`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -36,61 +36,61 @@ const getAllCustomers = () =>
         } else if (Array.isArray(data.$values)) {
           resolve(data.$values);
         } else {
-          reject("No customers found or invalid data format");
+          reject("No services found or invalid data format");
         }
       })
 
       .catch((error) => {
-        console.error("Error fetching customers:", error);
+        console.error("Error fetching services:", error);
         reject(error);
       });
   });
 
-  // API Call to create a new customer
-   const createCustomer = (customerData) =>
+  // API Call to create a new Service
+   const createService = (serviceData) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/customers`, {
+    fetch(`${endpoint}/services`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Include token for authentication
         "Access-Control-Allow-Origin": "*", // Allow CORS for all origins
       },
-      body: JSON.stringify(customerData),
+      body: JSON.stringify(serviceData),
     })
     .then((response) => response.json())
     .then((data) => resolve(data))
     .catch((error) => {
-      console.error("Error creating customer:", error);
+      console.error("Error creating service:", error);
       reject(error);
     });
   }
 );
 
-// API Call to update an existing customer
-const updateCustomer = (customerId, customerData) =>
+// API Call to update an existing service
+const updateService = (serviceId, serviceData) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/customers/${customerId}`, {
+    fetch(`${endpoint}/Services/${serviceId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Include token for authentication
         "Access-Control-Allow-Origin": "*", // Allow CORS for all origins
       },
-      body: JSON.stringify(customerData),
+      body: JSON.stringify(serviceData),
     })
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch((error) => {
-        console.error("Error updating customer:", error);
+        console.error("Error updating service:", error);
         reject(error);
       });
   });
 
-// API Call to delete a customer
-const deleteCustomer = (customerId) =>
+// API Call to delete a service
+const deleteService = (serviceId) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/customers/${customerId}`, {
+    fetch(`${endpoint}/Services/${serviceId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -100,15 +100,15 @@ const deleteCustomer = (customerId) =>
     })
       .then((response) => {
         if (response.ok) {
-          resolve("Customer deleted successfully");
+          resolve("Service deleted successfully");
         } else {
-          reject("Failed to delete customer");
+          reject("Failed to delete Service");
         }
       })
       .catch((error) => {
-        console.error("Error deleting customer:", error);
+        console.error("Error deleting Service:", error);
         reject(error);
       });
   });
 
-export { getAllCustomers, createCustomer, updateCustomer, deleteCustomer };
+export { getAllServices, createService, updateService, deleteService };
