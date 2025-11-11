@@ -283,6 +283,7 @@ function Invoices() {
                   <th>Invoice Total</th>
                   <th>EDIT</th>
                   <th>DELETE</th>
+                  <th>Payment</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,6 +309,9 @@ function Invoices() {
                       >
                         DELETE
                       </Button>
+                    </td>
+                    <td>
+                      <Button variant="success">ADD PAYMENT</Button>
                     </td>
                   </tr>
                 ))}

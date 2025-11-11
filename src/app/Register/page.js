@@ -16,7 +16,7 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await RegisterUser(formData.username, formData.email, formData.password);
+      await RegisterUser(formData.useRouter, formData.email, formData.password);
       alert("Registration successful! You can now log in.");
       router.push("/Login");
     } catch (err) {
