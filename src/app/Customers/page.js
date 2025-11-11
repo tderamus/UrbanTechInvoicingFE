@@ -9,6 +9,7 @@ import {
   updateCustomer,
   deleteCustomer,
 } from "@/api/CustomerData";
+import styles from "./customer.module.css";
 
 function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -100,6 +101,7 @@ function Customers() {
   return (
     <>
       <NavMenu />
+      <div className={styles.MainCustomerContainer}>
       <div className="m-3">
         {!showForm ? (
           <Button className="mb-3" onClick={() => setShowForm(true)}>
@@ -218,6 +220,7 @@ function Customers() {
           )}
         </div>
       )}
+      </div>
     </>
   );
 }
