@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import NavMenu from "@/components/NavBar";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form } from "react-bootstrap";
 import {
   getAllCustomers,
   createCustomer,
   updateCustomer,
   deleteCustomer,
 } from "@/api/CustomerData";
-import { Form } from "react-bootstrap";
+import styles from "./customer.module.css";
 
 function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -87,7 +87,7 @@ function Customers() {
         await createCustomer(formData);
         setSuccess("Customer created successfully!");
       }
-      setFormSubmitted(true);
+      setFormSubmitted((prev) => !prev);
       setFormData({ name: "", emailAddress: "", phoneNumber: "" });
       setShowForm(false);
       setUpdatingCustomer(null);
@@ -101,6 +101,7 @@ function Customers() {
   return (
     <>
       <NavMenu />
+      <div className={styles.MainCustomerContainer}>
       <div className="m-3">
         {!showForm ? (
           <Button className="mb-3" onClick={() => setShowForm(true)}>
@@ -161,8 +162,12 @@ function Customers() {
               </Button>
               <Button
                 variant="secondary"
-                onClick={() => setShowForm(false)}
-                className="ml-2"
+                className="ml-3 ms-2"
+                onClick={() => {
+                  setShowForm(false);
+                  setUpdatingCustomer(null);
+                  setFormData({ name: "", emailAddress: "", phoneNumber: "" });
+                }}
               >
                 Cancel
               </Button>
@@ -195,14 +200,16 @@ function Customers() {
                     <td>
                       <Button
                         variant="warning"
-                        onClick={() => handleEdit(customer)}>
+                        onClick={() => handleEdit(customer)}
+                      >
                         EDIT
                       </Button>
                     </td>
                     <td>
                       <Button
                         variant="danger"
-                        onClick={() => handleDelete(customer.customerId)}>
+                        onClick={() => handleDelete(customer.customerId)}
+                      >
                         DELETE
                       </Button>
                     </td>
@@ -213,6 +220,7 @@ function Customers() {
           )}
         </div>
       )}
+      </div>
     </>
   );
 }
